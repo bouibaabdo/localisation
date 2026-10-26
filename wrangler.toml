@@ -1,5 +1,14 @@
 name = "trust-locate"
+main = "worker/index.ts"
 compatibility_date = "2024-11-01"
 compatibility_flags = ["nodejs_compat"]
 
-# Cloudflare Pages Functions are automatically discovered from the /functions directory
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+
+# Optional Cloudflare KV namespace for distributed persistence:
+# [[kv_namespaces]]
+# binding = "TRUSTLOCATE_KV"
+# id = "your_kv_namespace_id"
