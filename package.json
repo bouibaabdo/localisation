@@ -9,7 +9,7 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "deploy": "npm run build && wrangler pages deploy dist --project-name=trust-locate",
+    "cf:deploy": "npm run build && wrangler pages deploy dist --project-name=trust-locate",
     "pages:dev": "npm run build && wrangler pages dev dist --port 8788",
     "cf:login": "wrangler login",
     "cf:whoami": "wrangler whoami"
