@@ -5,6 +5,9 @@ export interface LocationPoint {
   lng: number;
   accuracy: number;
   capturedAt: number;
+  formattedAddress?: string;
+  city?: string;
+  country?: string;
 }
 
 export interface RequestHistoryItem {

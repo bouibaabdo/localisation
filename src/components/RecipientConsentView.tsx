@@ -15,6 +15,7 @@ import {
 import type { LocationPoint, LocationRequestData, SupportedLanguage } from '../types';
 import { translations } from '../i18n/translations';
 import { getRequest, submitConsent, revokeRequest } from '../services/api';
+import { reverseGeocode } from '../services/geocoding';
 import { MapView } from './MapView';
 
 interface RecipientConsentViewProps {
@@ -141,11 +142,26 @@ export const RecipientConsentView: React.FC<RecipientConsentViewProps> = ({
 
     navigator.geolocation.getCurrentPosition(
       async (pos) => {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+        const accuracy = Math.round(pos.coords.accuracy);
+
+        // Fetch real reverse geocoded address
+        let addrInfo: any = {};
+        try {
+          addrInfo = await reverseGeocode(lat, lng, lang);
+        } catch (e) {
+          console.warn('Geocoding error:', e);
+        }
+
         const liveLocation: LocationPoint = {
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude,
-          accuracy: Math.round(pos.coords.accuracy),
+          lat,
+          lng,
+          accuracy,
           capturedAt: pos.timestamp || Date.now(),
+          formattedAddress: addrInfo.formattedAddress,
+          city: addrInfo.city,
+          country: addrInfo.country,
         };
 
         try {

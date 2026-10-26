@@ -15,7 +15,7 @@ export const CreateRequestView: React.FC<CreateRequestViewProps> = ({ lang, onRe
   const [requesterName, setRequesterName] = useState('');
   const [purpose, setPurpose] = useState('');
   const [durationMinutes, setDurationMinutes] = useState(15);
-  const [isMockMode, setIsMockMode] = useState(true); // Default to mock mode for safe instant trial
+  const [isMockMode, setIsMockMode] = useState(false); // Default to Real Data
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 

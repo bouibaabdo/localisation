@@ -48,6 +48,9 @@ export async function onRequestPost(context: any) {
         lng,
         accuracy: Math.round(accuracy),
         capturedAt: now,
+        formattedAddress: location.formattedAddress ? String(location.formattedAddress).slice(0, 200) : undefined,
+        city: location.city ? String(location.city).slice(0, 100) : undefined,
+        country: location.country ? String(location.country).slice(0, 100) : undefined,
       };
       reqData.status = 'ACCEPTED';
       reqData.historyLog.push({

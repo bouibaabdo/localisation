@@ -184,7 +184,10 @@ app.post('/api/requests/:token/consent', (req, res) => {
       lat,
       lng,
       accuracy: Math.round(accuracy),
-      capturedAt: now
+      capturedAt: now,
+      formattedAddress: location.formattedAddress ? String(location.formattedAddress).slice(0, 200) : undefined,
+      city: location.city ? String(location.city).slice(0, 100) : undefined,
+      country: location.country ? String(location.country).slice(0, 100) : undefined,
     };
     request.status = 'ACCEPTED';
     request.historyLog.push({
